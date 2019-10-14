@@ -27,7 +27,7 @@
     <mybatis-plus.version>3.0.6</mybatis-plus.version>
     <mysql-driver.version>5.1.21</mysql-driver.version>
     <oracle-driver.version>11.2.0.3</oracle-driver.version>
-    <fastjson.version>1.2.23</fastjson.version>
+    <fastjson.version>1.2.25</fastjson.version>
   </properties>
 
   <dependencies>
