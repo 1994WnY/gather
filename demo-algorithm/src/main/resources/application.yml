@@ -1,0 +1,164 @@
+server:
+  port: 9001
+
+spring:
+  profiles:
+    active: prod
+  application:
+    name: algorithm
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+  security:
+    user:
+      name: admin
+      password: admin
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    username: root
+    password: root940923
+    url: jdbc:mysql://47.105.195.139:3306/algorithm?characterEncoding=UTF8&socketTimeout=60000
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+  cloud:
+    inetutils:
+      default-ip-address: 192.168.8.151
+eureka:
+  instance:
+    instance-id: ${spring.application.name}(${spring.cloud.client.ip-address}:${server.port})
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://admin:Botech2019@172.16.1.161:9000/eureka/
+
+botech:
+  swagger:
+    contextPath: ${server.servlet.context-path:}
+    basePackage: com.botech.demoalgorithm.controller
+    title: ${spring.application.name}的swagger
+    description: ${spring.application.name}的swagger描述
+    version: V1.0
+  druid:
+    stat-view:
+      configuration:
+        loginUsername: admin
+        loginPassword: Botech2019
+        resetEnable: false
+        logSlowSql: true
+
+info:
+  app.name: ${spring.application.name}
+  company.name: botech
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+feign:
+  hystrix:
+    enabled: true
+
+task:
+  totalNum: 8
+  create:
+    param:
+      Private:
+        algParam:
+          minDetectWidth: 30
+          minDetectHeight: 30
+          maxDetectWidth: 250
+          maxDetectHeight: 250
+          hotRegion:
+            - {index: 0,pointX: 0,pointY: 0}
+            - {index: 1,pointX: 1280,pointY: 0}
+            - {index: 2,pointX: 1280,pointY: 700}
+            - {index: 3,pointX: 0,pointY: 700}
+  update:
+    fullParam:
+      Private:
+        algParam:
+          minDetectWidth: 30
+          minDetectHeight: 30
+          maxDetectWidth: 250
+          maxDetectHeight: 250
+          hotRegion:
+            - {index: 0,pointX: 0,pointY: 0}
+            - {index: 1,pointX: 1280,pointY: 0}
+            - {index: 2,pointX: 1280,pointY: 700}
+            - {index: 3,pointX: 0,pointY: 700}
+data:
+  frameheader:
+    data: 0
+    dataLen: 0
+    flag: 0
+    index: 632221480
+    height: 1088
+    rebackInfo: 0
+    width: 1920
+image:
+  path:
+    cap-image: /algorithm/capimages
+    db-image: /algorithm/dbimages
+  qualityScore: 10
+  getfeature: 0
+target:
+  size:
+    total-size: 1000000
+service:
+  version: 1.0.0
+  ip: 192.168.8.151
+  port: 9001
+ftp:
+  ip: 172.16.1.161
+  port: 21
+  user: wangny
+  passwd: 123456
+logging:
+  config: classpath:config/logback/logback-spring.xml
+---
+spring:
+  profiles: dev
+#  resources:
+#    static-locations:
+#      -classpath:/META-INF/resources/
+#      -classpath:/resources/
+#      -classpath:/static/
+#      -classpath:/public/
+#      -file:D:\\algorithm\\capimages\\
+image:
+  path:
+    cap-image: D:\\algorithm\\capimages
+    db-image: D:\\algorithm\\dbimages
+service:
+  ip: 192.168.8.151
+  port: 9001
+
+---
+spring:
+  profiles: prod
+#  resources:
+#    static-locations:
+#      -classpath:/META-INF/resources/
+#      -classpath:/resources/
+#      -classpath:/static/
+#      -classpath:/public/
+#      -file:/algorithm/capimages/
+
+image:
+  path:
+    cap-image: /algorithm/capimages
+    db-image: /algorithm/dbimages
+service:
+  ip: 172.16.1.161
+  port: 9001
+ftp:
+  ip: 172.16.1.161
+  port: 21
+  user: wangny
+  passwd: 123456
